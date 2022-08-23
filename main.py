@@ -50,9 +50,21 @@ def threadVideoGet(source=0):
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')  # concat frame one by one and show result
 
-@app.route('/')
-def index():
+@app.route('/1')
+def index1():
     return Response(threadVideoGet(0), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route('/2')
+def index2():
+    return Response(threadVideoGet(1), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route('/3')
+def index3():
+    return Response(threadVideoGet(1), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route('/4')
+def index4():
+    return Response(threadVideoGet(1), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=2204, threaded=True)
